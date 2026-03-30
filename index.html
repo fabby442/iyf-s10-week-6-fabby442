@@ -21,6 +21,21 @@
     <title>User Directory</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
+<div id="controls">
+    <input type="text" id="search" placeholder="Search by name or email...">
+    
+    <select id="sort">
+        <option value="az">Sort A-Z</option>
+        <option value="za">Sort Z-A</option>
+    </select>
+
+    <select id="filter-city">
+        <option value="all">Filter by City</option>
+        <!-- Cities will be dynamically added -->
+    </select>
+</div>
+
 <body>
     <div id="app">
         <h1>User Directory</h1>

@@ -222,3 +222,74 @@ postForm.addEventListener("submit", (e) => {
         postForm.reset();
     }
 });
+let allUsers = [];
+
+async function fetchUsers() {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    if (!response.ok) throw new Error("Failed to fetch users");
+    return response.json();
+}
+
+async function init() {
+    try {
+        showLoading();
+        allUsers = await fetchUsers();
+        displayUsers(allUsers);
+        populateCityFilter(allUsers);
+    } catch (err) {
+        showError(err.message);
+    } finally {
+        hideLoading();
+    }
+
+    // Live search
+    const searchInput = document.getElementById("search");
+    searchInput.addEventListener("input", (e) => {
+        updateDisplay();
+    });
+
+    // Sort
+    const sortSelect = document.getElementById("sort");
+    sortSelect.addEventListener("change", () => {
+        updateDisplay();
+    });
+
+    // Filter by city
+    const citySelect = document.getElementById("filter-city");
+    citySelect.addEventListener("change", () => {
+        updateDisplay();
+    });
+}
+
+function populateCityFilter(users) {
+    const citySelect = document.getElementById("filter-city");
+    const cities = Array.from(new Set(users.map(u => u.address.city)));
+    cities.forEach(city => {
+        const option = document.createElement("option");
+        option.value = city;
+        option.textContent = city;
+        citySelect.appendChild(option);
+    });
+}
+
+function updateDisplay() {
+    const query = document.getElementById("search").value.toLowerCase();
+    const sortOrder = document.getElementById("sort").value;
+    const cityFilter = document.getElementById("filter-city").value;
+
+    let filtered = allUsers.filter(user => 
+        user.name.toLowerCase().includes(query) || 
+        user.email.toLowerCase().includes(query)
+    );
+
+    if (cityFilter !== "all") {
+        filtered = filtered.filter(user => user.address.city === cityFilter);
+    }
+
+    filtered.sort((a, b) => {
+        if (sortOrder === "az") return a.name.localeCompare(b.name);
+        else return b.name.localeCompare(a.name);
+    });
+
+    displayUsers(filtered);
+}
