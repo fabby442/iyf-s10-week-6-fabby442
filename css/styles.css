@@ -1,0 +1,25 @@
+.weather-app {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: sans-serif;
+}
+
+.weather-app h1 {
+    text-align: center;
+}
+
+.weather-main img {
+    width: 80px;
+    height: 80px;
+}
+
+.hidden {
+    display: none;
+}
+
+.error {
+    color: red;
+}
