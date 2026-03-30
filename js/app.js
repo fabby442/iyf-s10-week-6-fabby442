@@ -179,3 +179,46 @@ function displayUsers(users) {
 
 // Initialize
 loadUsers();
+const postForm = document.getElementById("post-form");
+const postResult = document.getElementById("post-result");
+
+async function createPost(title, body, userId) {
+    try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title, body, userId })
+        });
+
+        if (!response.ok) throw new Error("Failed to create post");
+
+        const data = await response.json();
+        displayPostResult(data);
+    } catch (err) {
+        postResult.textContent = `Error: ${err.message}`;
+        postResult.classList.remove("hidden");
+    }
+}
+
+function displayPostResult(post) {
+    postResult.innerHTML = `
+        <h3>Post Created!</h3>
+        <p>🆔 ID: ${post.id}</p>
+        <p>Title: ${post.title}</p>
+        <p>Content: ${post.body}</p>
+        <p>User ID: ${post.userId}</p>
+    `;
+    postResult.classList.remove("hidden");
+}
+
+// Handle form submission
+postForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const title = document.getElementById("post-title").value.trim();
+    const body = document.getElementById("post-body").value.trim();
+    const userId = parseInt(document.getElementById("post-userId").value.trim());
+    if (title && body && userId) {
+        createPost(title, body, userId);
+        postForm.reset();
+    }
+});
