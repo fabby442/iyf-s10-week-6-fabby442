@@ -114,3 +114,19 @@ getUserData(1)
     .catch(error => {
         console.error("Error:", error);
     });
+    async function getUserDataAsync(userId) {
+    try {
+        const user = await getUserData(userId);
+        const posts = await getUserPosts(user.id);
+        const comments = await getPostComments(posts[0].id);
+        return { user, posts, comments };
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+}
+
+// Using it:
+(async () => {
+    const data = await getUserDataAsync(1);
+    console.log("Async/Await result:", data);
+})();
