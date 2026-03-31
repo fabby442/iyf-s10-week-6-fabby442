@@ -211,7 +211,7 @@ if (document.getElementById("users-container")) {
 // WEATHER PAGE
 // ========================
 if (document.getElementById("weather-display")) {
-    const API_KEY = "YOUR_API_KEY_HERE"; // replace with your OpenWeatherMap key
+    const API_KEY = "api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}"; // replace with your OpenWeatherMap key
     const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
     const form = document.getElementById("search-form");
     const cityInput = document.getElementById("city-input");
