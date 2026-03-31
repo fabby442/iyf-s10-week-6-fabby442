@@ -1,13 +1,56 @@
-.weather-app {
-    max-width: 500px;
-    margin: 2rem auto;
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    margin: 0;
     padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-family: sans-serif;
+    background-color: #f5f5f5;
 }
 
-.weather-app h1 {
+/* ---------------------- */
+/* Async Basics Output */
+pre {
+    background: #222;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+/* ---------------------- */
+/* User Directory */
+#controls {
+    margin-bottom: 1rem;
+}
+
+#controls input, #controls select {
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.user-card {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.hidden { display: none; }
+
+#error-users, #post-result, #error-weather {
+    color: red;
+    margin: 0.5rem 0;
+}
+
+/* ---------------------- */
+/* Weather App */
+#weather-display {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 5px;
+    max-width: 400px;
+    margin-top: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     text-align: center;
 }
 
@@ -16,10 +59,7 @@
     height: 80px;
 }
 
-.hidden {
-    display: none;
-}
-
-.error {
-    color: red;
+#post-form-container, #weather-display {
+    max-width: 500px;
+    margin: 1rem auto;
 }
